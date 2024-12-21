@@ -1,0 +1,13 @@
+filename,sample_name,direction
+10_lane1_20230620000_S2_L001_R1_001.fastq.gz,arpe_tb40E_96hpi_noflavo,R1
+10_lane1_20230620000_S2_L001_R2_001.fastq.gz,arpe_tb40E_96hpi_noflavo,R2
+10_lane2_20230620000_S13_L002_R1_001.fastq.gz,arpe_tb40E_96hpi_noflavo,R1
+10_lane2_20230620000_S13_L002_R2_001.fastq.gz,arpe_tb40E_96hpi_noflavo,R2
+11_lane1_20230620000_S3_L001_R1_001.fastq.gz,arpe_tb40E_96hpi_flavo,R1
+11_lane1_20230620000_S3_L001_R2_001.fastq.gz,arpe_tb40E_96hpi_flavo,R2
+11_lane2_20230620000_S14_L002_R1_001.fastq.gz,arpe_tb40E_96hpi_flavo,R1
+11_lane2_20230620000_S14_L002_R2_001.fastq.gz,arpe_tb40E_96hpi_flavo,R2
+9_lane1_20230620000_S11_L001_R1_001.fastq.gz,arpe_mock,R1
+9_lane1_20230620000_S11_L001_R2_001.fastq.gz,arpe_mock,R2
+9_lane2_20230620000_S22_L002_R1_001.fastq.gz,arpe_mock,R1
+9_lane2_20230620000_S22_L002_R2_001.fastq.gz,arpe_mock,R2
