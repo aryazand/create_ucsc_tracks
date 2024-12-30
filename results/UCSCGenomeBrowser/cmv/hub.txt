@@ -1,4 +1,4 @@
-hub cmv
+hub KF297339.1
 shortLabel HCMV-TB40-E
 longLabel Annotated CDS for HCMV strain TB40-E (KF297339.1)
 genomesFile genomes.txt
