@@ -1,6 +1,8 @@
 /data/**
 /log/
 results/* 
+!results/tracks/
+!results/tracks/**
 !results/UCSCGenomeBrowser/
 !results/UCSCGenomeBrowser/**
 /.snakemake/
