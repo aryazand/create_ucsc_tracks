@@ -20,12 +20,26 @@ rule create_bigbed:
     output:
         bigbed = "results/UCSCGenomeBrowser/{species}/{genome}/{genome}.bb"
     conda:
-        "../envs/bedtobigbed.yml"
+        "../envs/ucsc_tools.yml"
     log:
         "log/create_bigbed_{species}_{genome}.log"
     shell:
         """
         bedToBigBed {input.bed} {input.chrom_sizes} {output.bigbed}
+        """
+
+rule create_2bit:
+    input:
+        fasta = "data/genome/{species}/{genome}.fna"
+    output:
+        twobit = "results/UCSCGenomeBrowser/{species}/{genome}/sequence.2bit"
+    conda:
+        "../envs/ucsc_tools.yml"
+    log:
+        "log/create_2bit_{species}_{genome}.log"
+    shell:
+        """
+        faToTwoBit {input.fasta} {output.twobit}
         """
 
 # prepare a UCSC genome browser trackdb.txt file
@@ -64,6 +78,7 @@ rule create_trackdb:
                     '',
                     'track {}'.format(sample),
                     'container multiWig',
+                    'type bigWig',
                     'aggregate transparentOverlay',
                     'showSubtrackColorOnUi on',
                     'shortLabel {}'.format(sample),
@@ -117,7 +132,8 @@ rule create_hub:
 # create genomes.txt file
 rule create_genometxt: 
     input:
-        trackdb_file = lambda wc: "results/UCSCGenomeBrowser/{species}/" + config["genomes"][wc.species]["genbank"] + "/trackDb.txt"    
+        trackdb_file = lambda wc: "results/UCSCGenomeBrowser/{species}/" + config["genomes"][wc.species]["genbank"] + "/trackDb.txt",
+        twobit_file = lambda wc: "results/UCSCGenomeBrowser/{species}/" + config["genomes"][wc.species]["genbank"] + "/sequence.2bit"
     output:
         genomes_file = "results/UCSCGenomeBrowser/{species}/genomes.txt"
     log:
@@ -128,7 +144,9 @@ rule create_genometxt:
     shell:
         """
         trackdb_path=$(realpath --relative-base=$(dirname {output.genomes_file}) {input.trackdb_file})
+        twobit_path=$(realpath --relative-base=$(dirname {output.genomes_file}) {input.twobit_file})
         echo "genome {params.genomes}" > {output.genomes_file}
         echo "description {params.shortlabel}" >> {output.genomes_file}
         echo "trackDb $trackdb_path" >> {output.genomes_file}
+        echo "twoBitPath $twobit_path" >> {output.genomes_file}
         """
