@@ -7,11 +7,12 @@ sample_names = set(samples.sample_name)
 
 configfile: "config.yml"
 
+# TODO: define expand parameters from config file
 rule all:
     input:
-        genomes_file = expand("results/UCSCGenomeBrowser/{species}/genomes.txt", genome = 'cmv'),
-        hub_file = expand("results/UCSCGenomeBrowser/{species}/hub.txt", genome = 'cmv'),
-        trackdb_file = expand(os.path.join("results/UCSCGenomeBrowser/{species}/{genome}", , "trackDb.txt"), genome = 'cmv') 
+        genomes_file = expand("results/UCSCGenomeBrowser/{species}/genomes.txt", species = 'cmv'),
+        hub_file = expand("results/UCSCGenomeBrowser/{species}/hub.txt", species = 'cmv'),
+        trackdb_file = expand("results/UCSCGenomeBrowser/{species}/{genome}/trackDb.txt", species = 'cmv', genome = config["genomes"]['cmv']['genbank']) 
 
 
 include: "rules/visualization.smk"

@@ -5,14 +5,17 @@ mem: '4000'
 threads: 1
 
 ##### GENERAL #####
-project_name: myData
-email: arya-zandvakili@uiowa.edu # used for UCSC hub generation
+ucsc:
+    project_name: myData
+    email: arya-zandvakili@uiowa.edu # used for UCSC hub generation
 
 ##### PROCESSING #####
 # genome label for UCSC hub (hg38, mm10) and IGV-report
 genomes: 
     cmv: 
         genbank: "KF297339.1"
+        longlabel: "Annotated CDS for HCMV strain TB40-E (KF297339.1)"
+        shortlabel: "HCMV-TB40-E"
 
 ##### VISUALIZATION using gtracks powered by pyGenomeTracks #####
 
