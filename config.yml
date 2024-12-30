@@ -16,6 +16,7 @@ genomes:
         genbank: "KF297339.1"
         longlabel: "Annotated CDS for HCMV strain TB40-E (KF297339.1)"
         shortlabel: "HCMV-TB40-E"
+        ucsc-defaultPos: "KF297339.1:1-237683"
 
 ##### VISUALIZATION using gtracks powered by pyGenomeTracks #####
 

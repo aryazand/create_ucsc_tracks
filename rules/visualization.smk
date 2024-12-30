@@ -140,7 +140,8 @@ rule create_genometxt:
         "log/create_genometxt_{species}.log"
     params:
         genomes = lambda wc: config["genomes"][wc.species]["genbank"],
-        shortlabel = lambda wc: config["genomes"][wc.species]["shortlabel"]
+        shortlabel = lambda wc: config["genomes"][wc.species]["shortlabel"],
+        defaultPos = lambda wc: config["genomes"][wc.species]["ucsc-defaultPos"]
     shell:
         """
         trackdb_path=$(realpath --relative-base=$(dirname {output.genomes_file}) {input.trackdb_file})
@@ -149,4 +150,7 @@ rule create_genometxt:
         echo "description {params.shortlabel}" >> {output.genomes_file}
         echo "trackDb $trackdb_path" >> {output.genomes_file}
         echo "twoBitPath $twobit_path" >> {output.genomes_file}
+        echo "organism {wildcards.species}" >> {output.genomes_file}
+        echo "defaultPos {params.defaultPos}" >> {output.genomes_file}
+        """
         """
