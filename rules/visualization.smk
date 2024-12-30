@@ -153,4 +153,11 @@ rule create_genometxt:
         echo "organism {wildcards.species}" >> {output.genomes_file}
         echo "defaultPos {params.defaultPos}" >> {output.genomes_file}
         """
-        """
+
+rule hubcheck:
+    input:
+        hub = expand("results/UCSCGenomeBrowser/{species}/hub.txt", species = config["genomes"].keys())
+    conda:
+        "../envs/ucsc_hubcheck.yml"
+    shell:
+        "hubCheck {input.hub}"
