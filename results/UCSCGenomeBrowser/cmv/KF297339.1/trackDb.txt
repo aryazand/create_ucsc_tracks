@@ -38,35 +38,6 @@ longLabel arpe_tb40E_96hpi_noflavo
 
 ##############################################
 
-track arpe_tb40E_96hpi_flavo
-container multiWig
-type bigWig
-aggregate transparentOverlay
-showSubtrackColorOnUi on
-shortLabel arpe_tb40E_96hpi_flavo
-longLabel arpe_tb40E_96hpi_flavo
-
-	track arpe_tb40E_96hpi_flavo_for
-	parent arpe_tb40E_96hpi_flavo
-	shortLabel arpe_tb40E_96hpi_flavo_forward
-	longLabel arpe_tb40E_96hpi_flavo_forward
-	bigDataUrl bw/arpe_tb40E_96hpi_flavo_cmv_for.bw
-	parent arpe_tb40E_96hpi_flavo
-	type bigWig
-	color 113,35,124
-
-	track arpe_tb40E_96hpi_flavo_rev
-	parent arpe_tb40E_96hpi_flavo
-	shortLabel arpe_tb40E_96hpi_flavo_reverse
-	longLabel arpe_tb40E_96hpi_flavo_reverse
-	bigDataUrl bw/arpe_tb40E_96hpi_flavo_cmv_rev.bw
-	parent arpe_tb40E_96hpi_flavo
-	type bigWig
-	negateValues on
-	color 113,35,124
-
-##############################################
-
 track arpe_mock
 container multiWig
 type bigWig
@@ -90,6 +61,35 @@ longLabel arpe_mock
 	longLabel arpe_mock_reverse
 	bigDataUrl bw/arpe_mock_cmv_rev.bw
 	parent arpe_mock
+	type bigWig
+	negateValues on
+	color 113,35,124
+
+##############################################
+
+track arpe_tb40E_96hpi_flavo
+container multiWig
+type bigWig
+aggregate transparentOverlay
+showSubtrackColorOnUi on
+shortLabel arpe_tb40E_96hpi_flavo
+longLabel arpe_tb40E_96hpi_flavo
+
+	track arpe_tb40E_96hpi_flavo_for
+	parent arpe_tb40E_96hpi_flavo
+	shortLabel arpe_tb40E_96hpi_flavo_forward
+	longLabel arpe_tb40E_96hpi_flavo_forward
+	bigDataUrl bw/arpe_tb40E_96hpi_flavo_cmv_for.bw
+	parent arpe_tb40E_96hpi_flavo
+	type bigWig
+	color 113,35,124
+
+	track arpe_tb40E_96hpi_flavo_rev
+	parent arpe_tb40E_96hpi_flavo
+	shortLabel arpe_tb40E_96hpi_flavo_reverse
+	longLabel arpe_tb40E_96hpi_flavo_reverse
+	bigDataUrl bw/arpe_tb40E_96hpi_flavo_cmv_rev.bw
+	parent arpe_tb40E_96hpi_flavo
 	type bigWig
 	negateValues on
 	color 113,35,124
