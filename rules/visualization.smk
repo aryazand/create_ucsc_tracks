@@ -88,9 +88,9 @@ rule create_bigbed:
         "log/create_bigbed_{species}_{genome}.log"
     shell:
         """
-        sort -k1,1 -k2,2n {input.biggenePred} > {input.biggenePred}
+        sort -k1,1 -k2,2n {input.biggenePred} > {input.biggenePred}.sorted
         wget https://genome.ucsc.edu/goldenPath/help/examples/bigGenePred.as
-        bedToBigBed -type=bed12+8 -tab -as=bigGenePred.as {input.biggenePred} {input.chrom_sizes} {output.bigbed}
+        bedToBigBed -type=bed12+8 -tab -as=bigGenePred.as {input.biggenePred}.sorted {input.chrom_sizes} {output.bigbed}
         rm bigGenePred.as
         """
 
