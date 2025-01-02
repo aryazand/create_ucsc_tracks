@@ -10,6 +10,7 @@ configfile: "config.yml"
 # TODO: define expand parameters from config file
 rule all:
     input:
+        bigwig = expand("results/UCSCGenomeBrowser/{species}/{genome}/bw/{sample}_{species}_{direction}.bw", species = config["genomes"].keys(), genome = config["genomes"]['cmv']['genbank'], sample = sample_names, direction = ['for', 'rev']),
         genomes_file = expand("results/UCSCGenomeBrowser/{species}/genomes.txt", species = config["genomes"].keys()),
         hub_file = expand("results/UCSCGenomeBrowser/{species}/hub.txt", species = config["genomes"].keys()),
         trackdb_file = expand("results/UCSCGenomeBrowser/{species}/{genome}/trackDb.txt", species = config["genomes"].keys(), genome = config["genomes"]['cmv']['genbank']) 
