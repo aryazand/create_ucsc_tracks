@@ -1,4 +1,4 @@
-rule create_symlinks:
+rule create_bigwig_copies:
     input:
         bw = "results/tracks/{sample}_{species}_{direction}.bw",
         gff3 = "data/genome/{species}/{genome}.gff"
@@ -8,7 +8,7 @@ rule create_symlinks:
         "log/create_symlinks_{sample}_{species}_{direction}_{genome}.log"
     shell:
         """
-        ln -sr {input.bw} {output.bw}
+        cp {input.bw} {output.bw}
         """
 
 rule download_genome:
