@@ -1,7 +1,7 @@
 rule create_symlinks:
     input:
         bw = "results/tracks/{sample}_{species}_{direction}.bw",
-        genome_data = "data/genome/{species}/{genome}.bed"
+        gtf = "data/genome/{species}/{genome}.gtf"
     output:
         bw = "results/UCSCGenomeBrowser/{species}/{genome}/bw/{sample}_{species}_{direction}.bw"
     log:
@@ -9,6 +9,55 @@ rule create_symlinks:
     shell:
         """
         ln -sr {input.bw} {output.bw}
+        """
+
+rule download_genome:
+    output: 
+        fna = "data/genome/{species}/{genome}.fna",
+        gtf = "data/genome/{species}/{genome}.gtf"
+    conda:
+        "../envs/get-genome.yml"
+    log:
+        "log/download_genome_{species}_{genome}.log",
+    params:
+        accession = lambda wildcards: config["genomes"][wildcards.species]["accession"]
+    shell:
+        """
+        datasets download genome accession {params.accession} --filename {wildcards.genome}.zip --include gtf,genome
+        unzip {wildcards.genome}.zip -d {wildcards.genome}
+        mv {wildcards.genome}/ncbi_dataset/data/{params.accession}/*.fna {output.fna}
+        mv {wildcards.genome}/ncbi_dataset/data/{params.accession}/*.gtf {output.gtf}
+        sed -i -re 's/(>\S*)\s.*/\\1/' {output.fna}
+        rm {wildcards.genome}.zip
+        rm -r {wildcards.genome}
+        """
+
+rule get_chrom_sizes:
+    input:
+        "data/genome/{genome}.fna"
+    output:
+        "data/genome/{genome}.chrom.sizes"
+    conda:
+        "../envs/get-genome.yml"
+    log:
+        "log/get_chrom_sizes_{genome}.log"
+    shell:
+        """
+        bioawk -cfastx '{{ print $name, length($seq) }}' {input} > {output} 
+        """
+
+rule gtfToGenePred:
+    input:
+        gtf = "data/genome/{species}/{genome}.gtf"
+    output:
+        genePred = "results/UCSCGenomeBrowser/{species}/{genome}/{genome}.genePred"
+    conda:
+        "../envs/ucsc_tools.yml"
+    log:
+        "log/gtfToGenePred_{species}_{genome}.log"
+    shell:
+        """
+        gtfToGenePred {input.gtf} {output.genePred} -ignoreGroupsWithoutExons -genePredExt
         """
 
 # create bigbed for genome features
@@ -47,7 +96,7 @@ rule create_2bit:
 rule create_trackdb:
     input:
         samples = expand("results/UCSCGenomeBrowser/{{species}}/{{genome}}/bw/{sample}_{{species}}_{direction}.bw", sample = sample_names, direction = ['rev', 'for']),
-        bigbed = lambda wc: "results/UCSCGenomeBrowser/{species}/{genome}/{genome}.bb"
+        genepred = lambda wc: "results/UCSCGenomeBrowser/{species}/{genome}/{genome}.genePred"
     output:
         trackdb_file = "results/UCSCGenomeBrowser/{species}/{genome}/trackDb.txt"
     log:
@@ -58,10 +107,10 @@ rule create_trackdb:
             
             track_db = [
                 'track {}'.format(config["genomes"][wildcards.species]["genbank"]),
-                'type bigGenePred',
+                'type GenePred',
                 'group map',
                 'priority 1',
-                'bigDataUrl {}'.format(os.path.basename(input.bigbed)),
+                'bigDataUrl {}'.format(os.path.basename(input.genepred)),
                 'longLabel {}'.format(config["genomes"][wildcards.species]["longlabel"]), 
                 'shortLabel {}'.format(config["genomes"][wildcards.species]["shortlabel"]),
                 'visibility pack',
@@ -100,6 +149,7 @@ rule create_trackdb:
                     '\tbigDataUrl bw/{}.bw'.format(sample + "_" + wildcards.species + "_rev"),
                     '\tparent {}'.format(sample),
                     '\ttype bigWig',
+                    '\tnegateValues on',
                     '\tcolor 113,35,124', 
                     ''
                 ]
