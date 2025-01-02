@@ -9,32 +9,41 @@ visibility pack
 
 ##############################################
 
-track arpe_tb40E_96hpi_noflavo
+track arpe_mock
 container multiWig
 type bigWig
 aggregate transparentOverlay
 showSubtrackColorOnUi on
-shortLabel arpe_tb40E_96hpi_noflavo
-longLabel arpe_tb40E_96hpi_noflavo
+shortLabel arpe_mock
+longLabel arpe_mock
+visibility full
+autoScale group
+maxHeightPixels 100:50:8
+type bigWig
+priority 2
 
-	track arpe_tb40E_96hpi_noflavo_for
-	parent arpe_tb40E_96hpi_noflavo
-	shortLabel arpe_tb40E_96hpi_noflavo_forward
-	longLabel arpe_tb40E_96hpi_noflavo_forward
-	bigDataUrl bw/arpe_tb40E_96hpi_noflavo_cmv_for.bw
-	parent arpe_tb40E_96hpi_noflavo
+	track arpe_mock_for
+	parent arpe_mock
+	shortLabel arpe_mock_forward
+	longLabel arpe_mock_forward
+	bigDataUrl bw/arpe_mock_cmv_for.bw
+	parent arpe_mock
 	type bigWig
 	color 113,35,124
+	altColor 113,35,124
+	priority 2.1
 
-	track arpe_tb40E_96hpi_noflavo_rev
-	parent arpe_tb40E_96hpi_noflavo
-	shortLabel arpe_tb40E_96hpi_noflavo_reverse
-	longLabel arpe_tb40E_96hpi_noflavo_reverse
-	bigDataUrl bw/arpe_tb40E_96hpi_noflavo_cmv_rev.bw
-	parent arpe_tb40E_96hpi_noflavo
+	track arpe_mock_rev
+	parent arpe_mock
+	shortLabel arpe_mock_reverse
+	longLabel arpe_mock_reverse
+	bigDataUrl bw/arpe_mock_cmv_rev.bw
+	parent arpe_mock
 	type bigWig
 	negateValues on
-	color 113,35,124
+	color 242,157,228
+	altColor 242,157,228
+	priority 2.2
 
 ##############################################
 
@@ -45,6 +54,11 @@ aggregate transparentOverlay
 showSubtrackColorOnUi on
 shortLabel arpe_tb40E_96hpi_flavo
 longLabel arpe_tb40E_96hpi_flavo
+visibility full
+autoScale group
+maxHeightPixels 100:50:8
+type bigWig
+priority 2
 
 	track arpe_tb40E_96hpi_flavo_for
 	parent arpe_tb40E_96hpi_flavo
@@ -54,6 +68,8 @@ longLabel arpe_tb40E_96hpi_flavo
 	parent arpe_tb40E_96hpi_flavo
 	type bigWig
 	color 113,35,124
+	altColor 113,35,124
+	priority 2.1
 
 	track arpe_tb40E_96hpi_flavo_rev
 	parent arpe_tb40E_96hpi_flavo
@@ -63,33 +79,44 @@ longLabel arpe_tb40E_96hpi_flavo
 	parent arpe_tb40E_96hpi_flavo
 	type bigWig
 	negateValues on
-	color 113,35,124
+	color 242,157,228
+	altColor 242,157,228
+	priority 2.2
 
 ##############################################
 
-track arpe_mock
+track arpe_tb40E_96hpi_noflavo
 container multiWig
 type bigWig
 aggregate transparentOverlay
 showSubtrackColorOnUi on
-shortLabel arpe_mock
-longLabel arpe_mock
+shortLabel arpe_tb40E_96hpi_noflavo
+longLabel arpe_tb40E_96hpi_noflavo
+visibility full
+autoScale group
+maxHeightPixels 100:50:8
+type bigWig
+priority 2
 
-	track arpe_mock_for
-	parent arpe_mock
-	shortLabel arpe_mock_forward
-	longLabel arpe_mock_forward
-	bigDataUrl bw/arpe_mock_cmv_for.bw
-	parent arpe_mock
+	track arpe_tb40E_96hpi_noflavo_for
+	parent arpe_tb40E_96hpi_noflavo
+	shortLabel arpe_tb40E_96hpi_noflavo_forward
+	longLabel arpe_tb40E_96hpi_noflavo_forward
+	bigDataUrl bw/arpe_tb40E_96hpi_noflavo_cmv_for.bw
+	parent arpe_tb40E_96hpi_noflavo
 	type bigWig
 	color 113,35,124
+	altColor 113,35,124
+	priority 2.1
 
-	track arpe_mock_rev
-	parent arpe_mock
-	shortLabel arpe_mock_reverse
-	longLabel arpe_mock_reverse
-	bigDataUrl bw/arpe_mock_cmv_rev.bw
-	parent arpe_mock
+	track arpe_tb40E_96hpi_noflavo_rev
+	parent arpe_tb40E_96hpi_noflavo
+	shortLabel arpe_tb40E_96hpi_noflavo_reverse
+	longLabel arpe_tb40E_96hpi_noflavo_reverse
+	bigDataUrl bw/arpe_tb40E_96hpi_noflavo_cmv_rev.bw
+	parent arpe_tb40E_96hpi_noflavo
 	type bigWig
 	negateValues on
-	color 113,35,124
+	color 242,157,228
+	altColor 242,157,228
+	priority 2.2

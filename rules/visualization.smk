@@ -149,6 +149,11 @@ rule create_trackdb:
                     'showSubtrackColorOnUi on',
                     'shortLabel {}'.format(sample),
                     'longLabel {}'.format(sample),
+                    'visibility full',
+                    'autoScale group',
+                    'maxHeightPixels 100:50:8',
+                    'type bigWig',
+                    'priority 2',
                     '',
                     '\ttrack {}'.format(sample + "_for"),
                     '\tparent {}'.format(sample),
@@ -158,6 +163,8 @@ rule create_trackdb:
                     '\tparent {}'.format(sample),
                     '\ttype bigWig',
                     '\tcolor 113,35,124',
+                    '\taltColor 113,35,124',
+                    '\tpriority 2.1',
                     '', 
                     '\ttrack {}'.format(sample + "_rev"),
                     '\tparent {}'.format(sample),
@@ -167,7 +174,9 @@ rule create_trackdb:
                     '\tparent {}'.format(sample),
                     '\ttype bigWig',
                     '\tnegateValues on',
-                    '\tcolor 113,35,124', 
+                    '\tcolor 242,157,228', 
+                    '\taltColor 242,157,228',
+                    '\tpriority 2.2',
                     ''
                 ]
                 
