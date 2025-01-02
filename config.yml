@@ -14,6 +14,9 @@ ucsc:
 genomes: 
     cmv: 
         genbank: "KF297339.1"
+        accession: "GCA_027926625.1"
+        chr_name_change: "KF297339.1"
+        pattern_match: "KF297339.1"
         longlabel: "Annotated CDS for HCMV strain TB40-E (KF297339.1)"
         shortlabel: "HCMV-TB40-E"
         ucsc-defaultPos: "KF297339.1:1-237683"
